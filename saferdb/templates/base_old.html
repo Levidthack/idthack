@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block head %}
+        <title>Base</title>
+        {% endblock %}
+    </head>
+    <body style="background:red; background:linear-gradient(to bottom, rgba(255,38,28,0), rgba(255,255,255,1))">
+      <!-- style="font-family:Whitney; -->
+        <br>
+        <div class="container" >
+            <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand white_anchor" href="/saferdb/query/">DOT Search</a>
+              </div>
+              <div class="navbar-header">
+                <a  class="navbar-brand white_anchor" href="/saferdb/help/">Help</a>
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+                {% if user.is_authenticated %}
+                <ul class="nav navbar-nav">
+                    <li><a  class="white_anchor" href="/saferdb/advanced">Advanced Search</a></li>
+                    <!-- <li><a  href="{% url 'accounts:view_profile' %}">Profile</a></li> -->
+                    <!-- <li><a  href="{% url 'accounts:change_password' %}">Change Password</a></li> -->
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a class="white_anchor" href="{% url 'accounts:edit_profile' %}">Edit Profile</a></li>
+                    <li><a class="white_anchor" href="{% url 'accounts:logout' %}">Log out</a></li>
+                </ul>
+                {% else %}
+                <!-- <ul class="nav navbar-nav">
+                    <li><a  href="{% url 'accounts:reset_password' %}">Reset Password</a></li>
+                </ul> -->
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a class="white_anchor" href="{% url 'accounts:login' %}">Login</a></li>
+                  <li><a class="white_anchor" href="{% url 'accounts:register' %}">Register</a></li>
+                  <li><a class="white_anchor" href="{% url 'accounts:reset_password' %}" style="color:blue!important">Reset Password</a></li>
+
+                </ul>
+                {% endif %}
+              </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
+          </nav>
+        </div>
+        {% block body %}
+
+        {% endblock %}
+    </body>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $( document ).ready(function() {
+    $(document).ready(function(){
+        $(".navbar-header").parent().css("background-color", "#e1261c");
+        $(".navbar-collapse").css("background-color", "#e1261c");
+        $(".navbar-collapse").parent().css("background-color", "#e1261c");
+
+
+        $(".white_anchor").css("color", "white");
+        $(".pillars").css("background-color", "#e1261c");
+        $(".pillars").css("color", "white");
+        // $("#id_password").hide();
+
+    });
+    });
+
+    </script>
+</html>

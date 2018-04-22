@@ -12,12 +12,14 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import django_heroku
+from django.core.wsgi import get_wsgi_application
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+pub_key = "pk_test_JQjapwoMEXZYA01fnjDTBQaV"
+secret_key = "sk_test_x5RMbDg4B2MKf8hh1ysaWuBY"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -39,8 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hello'
+    'accounts.apps.AccountsConfig',
+    'saferdb.apps.SaferdbConfig'
+
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django_heroku.middleware.LoginRequiredMiddleware',
+    # 'gettingstarted.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'gettingstarted.urls'
@@ -57,7 +64,7 @@ ROOT_URLCONF = 'gettingstarted.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +76,10 @@ TEMPLATES = [
         },
     },
 ]
+
+TEMPLATE_DIRS =(
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "static", "templates"),
+)
 
 WSGI_APPLICATION = 'gettingstarted.wsgi.application'
 
@@ -123,3 +134,22 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 django_heroku.settings(locals())
+
+
+LOGIN_REDIRECT_URL = '/saferdb/query'
+
+LOGIN_URL = '/accounts/login'
+
+LOGIN_EXEMPT_URLS = {
+    r'^accounts/reset-password/$',
+    r'^accounts/logout/$',
+    r'^accounts/register/$'
+}
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'trucks.search@gmail.com'
+EMAIL_HOST_PASSWORD = 'cvt102315'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

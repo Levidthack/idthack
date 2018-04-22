@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+{% block body %}
+<div class="container">
+<form method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit" >Submit</button>
+
+</form>
+
+<button type="button" class="btn" name="button">Cancell Subscription</button>
+{% endblock %}

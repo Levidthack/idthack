@@ -1,0 +1,16 @@
+
+<h2>{{text}} records.</h2>
+<title>Search Results</title>
+
+{% block body %}
+<div class="container-fluid">
+
+{% for contact in contacts %}
+ <tr>
+   {% if contact.cardFound == 1 %}
+   <td>{{ contact.cardName }} </td>
+   {% endif %}
+</tr>
+{% endfor %}
+</div>
+{% endblock %}

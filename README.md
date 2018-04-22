@@ -1,4 +1,4 @@
-# idthack
+# IDThack
 
 Requires Pipenv to setup.
 
@@ -12,3 +12,7 @@ To run:
 7. Log in info 
 User ID: dev
 Password: admin123
+
+Use JavaScript.zip files and nodejs to send and recieve currency.
+
+Different cards correspond to different currencies. For example to recieve the evil coffee cup item recieve/send 100 usd.

@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash, login, authenticate
 from django.contrib.auth.decorators import login_required
-import stripe
+# import stripe
 import sys
 # import request
 
 pub_key = "pk_test_JQjapwoMEXZYA01fnjDTBQaV"
 secret_key = "sk_test_x5RMbDg4B2MKf8hh1ysaWuBY"
-stripe.api_key = secret_key
+# stripe.api_key = secret_key
 
 def register(request):
 

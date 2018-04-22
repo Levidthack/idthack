@@ -14,21 +14,64 @@ from django.views.generic.list import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import  logging
 import csv
+import json
 # import export_csv
 from django.core.management.base import BaseCommand
+from stellar_base.address import Address
+# import stellar_base as sb
+from stellar_base.builder import Builder
+from stellar_base.keypair import Keypair
+from stellar_base.asset import Asset
+from stellar_base.operation import Payment, ChangeTrust
+from stellar_base.transaction import Transaction
+from stellar_base.transaction_envelope import TransactionEnvelope as Te
+from stellar_base.memo import TextMemo
+from stellar_base.horizon import horizon_testnet, horizon_livenet
 
+def printAccountInfo(publickey):
+     #publickey: 'GCZ2MXFXT44Z3OMXF4RZBS4BEWOOQR4EFVSJMNIR3JZ5GTRI7Y2TJLM6'
+    address = Address(address=publickey)  # address = Address(address=publickey,network='public') for livenet
+    address.get()  # get the updated information
 
+    return address.balances
+
+def getPrimaryKey(key, valu1):
+    entry = Question.objects.get(pk =key)
+    entry.cardFound = valu1
+    entry.save()
 
 def paginated_search_results(request, c):
-
-    entry = Question.objects.get(pk =c[0])
-
-    entry.cardFound = 1
-    entry.save()
-    count = 'stuff'
+    print("*"*10)
+    accountInfo = printAccountInfo(c[0])
     entry = Question.objects.all()
+
+    for e in entry:
+        e.cardFound = 0
+        e.save()
+
+    for dict in accountInfo:
+        if('asset_code' in dict):
+            if(dict['asset_code'] == "SSR" and (float(dict['balance'])) >= 100.0):
+                getPrimaryKey(0, 1)
+                print("SSR")
+            elif(dict['asset_code'] == "CRD" and (float(dict['balance'])) >= 100.0):
+                getPrimaryKey(1, 1)
+                print("CRD")
+            elif(dict['asset_code'] == "USD" and (float(dict['balance'])) >= 100.0):
+                getPrimaryKey(2,1)
+                print("USD")
+            elif(dict['asset_code'] == "CNY" and (float(dict['balance'])) >= 100.0):
+                getPrimaryKey(3,1)
+                print("USD")
+
+    print("*"*10)
+    entry = Question.objects.all()
+
+    # entry.cardFound = 1
+    # entry.save()
     # entry = entry.count()
-    return render(request, 'saferdb/list.html', {'contacts': entry})
+    return render(request, 'saferdb/list.html', { 'contacts': entry})
+
 
 
 

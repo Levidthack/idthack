@@ -1,16 +1,27 @@
 
-<h2>{{text}} records.</h2>
+{% extends 'base.html' %}
+
+
 <title>Search Results</title>
 
 {% block body %}
-<div class="container-fluid">
+<div class="container">
 
 {% for contact in contacts %}
- <tr>
-   {% if contact.cardFound == 1 %}
-   <td>{{ contact.cardName }} </td>
-   {% endif %}
-</tr>
+{% if contact.cardFound == 1 %}
+
+    <div class="row">
+
+   {{ contact.cardName }}
+   <img src="{{contact.cardUrl}}" alt="">
+ </div>
+
+
+{% else %}
+<td>{{ contact.cardName }} - Not Found Yet.</td><br>
+<img src="https://www.ukmoths.org.uk/species/myrmecozela-ochraceella/" alt="">
+
+{% endif %}
 {% endfor %}
 </div>
 {% endblock %}
